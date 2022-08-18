@@ -10,7 +10,7 @@ namespace IF.Lastfm.Core.Json
         {
             var pageResponse = (IPageResponse<object>) value;
 
-            dynamic container = new
+            var container = new
             {
                 success = pageResponse.Success,
                 items = pageResponse.Content,

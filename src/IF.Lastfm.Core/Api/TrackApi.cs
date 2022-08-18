@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IF.Lastfm.Core.Api.Commands.Track;
 using IF.Lastfm.Core.Helpers;
 using IF.Lastfm.Core.Scrobblers;
+using System.Collections.Generic;
 
 namespace IF.Lastfm.Core.Api
 {
@@ -67,6 +68,18 @@ namespace IF.Lastfm.Core.Api
             var command = new GetInfoCommand(Auth)
             {
                 TrackMbid = mbid,
+                HttpClient = HttpClient
+            };
+
+            return await command.ExecuteAsync();
+        }
+
+        public async Task<LastResponse<LastTrack>> GetTopTagsAsync(string trackname, string artistname)
+        {
+            var command = new GetTopTagsCommand(Auth)
+            {
+                TrackName = trackname,
+                ArtistName = artistname,
                 HttpClient = HttpClient
             };
 

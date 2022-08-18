@@ -42,9 +42,33 @@ namespace IF.Lastfm.Core.Api
             return await command.ExecuteAsync();
         }
 
+        public async Task<PageResponse<LastTrack>> GetTopTracks(string username, LastStatsTimeSpan span, int pagenumber = 0, int count = LastFm.DefaultPageLength)
+        {
+            var command = new GetTopTracksCommand(Auth, username, span)
+            {
+                Page = pagenumber,
+                Count = count,
+                HttpClient = HttpClient
+            };
+
+            return await command.ExecuteAsync();
+        }
+
         public async Task<PageResponse<LastArtist>> GetTopArtists(string username, LastStatsTimeSpan span, int pagenumber = 0, int count = LastFm.DefaultPageLength)
         {
             var command = new GetTopArtistsCommand(Auth, username, span)
+            {
+                Page = pagenumber,
+                Count = count,
+                HttpClient = HttpClient
+            };
+
+            return await command.ExecuteAsync();
+        }
+
+        public async Task<PageResponse<LastScrobble>> GetTrackScrobbles(string track, string artist, string username, int pagenumber = 0, int count = LastFm.DefaultPageLength)
+        {
+            var command = new GetTrackScrobblesCommand(Auth, track, artist, username)
             {
                 Page = pagenumber,
                 Count = count,
